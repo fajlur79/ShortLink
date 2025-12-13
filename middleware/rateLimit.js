@@ -1,5 +1,6 @@
 import redis from "../services/redisClient.js";
 import { todayKey } from "../utils/dateKey.js";
+import rateLimit from "express-rate-limit";
 
 const DAILY_LIMIT = 100;
 
@@ -34,3 +35,19 @@ export async function rateLimitToken(req, res, next) {
 
   next();
 }
+
+export const ipLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, 
+  max: 100, 
+  message: {
+    status: 429,
+    error: "Too many requests from this IP, please try again after 15 minutes"
+  },
+  standardHeaders: true, 
+  legacyHeaders: false, 
+
+  
+  keyGenerator: (req) => {
+    return req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+  }
+});

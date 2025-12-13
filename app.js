@@ -3,6 +3,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import router from "./routes/index.js";
 import deviceMiddleware from "./middleware/device.js";
+import { ipLimiter } from './middleware/rateLimit.js';
 
 const app = express();
 
@@ -16,6 +17,10 @@ app.use((req, res, next)=>{
     console.log(`[REQUEST] IP: ${forwardIP || socketIP} | URL: ${req.url}`);
     next();
 })
+
+app.use(ipLimiter)
+
+app.use(express.json());
 
 app.use("/", router);
 
