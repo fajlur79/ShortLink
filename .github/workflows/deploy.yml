@@ -52,5 +52,6 @@ jobs:
 
           script: |
             cd ~/Shortener/code
-            git pull origin main
+            git fetch --all
+            git reset --hard origin/main
             docker compose up -d --build
