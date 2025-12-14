@@ -11,6 +11,16 @@ chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
 
 mkdir -p /home/ec2-user/Shortener/code/nginx
 
+cat <<'TERMINFO_EOT' > /tmp/foot.terminfo
+${foot_terminfo}
+TERMINFO_EOT
+export TERM=xterm
+
+/usr/bin/tic -x /tmp/foot.terminfo 
+              
+/usr/bin/infocmp foot > /var/log/foot_terminfo_check.log 2>&1
+
+            
 
 cat <<'EOT' > /home/ec2-user/Shortener/code/nginx/nginx.conf
 ${nginx_config}
