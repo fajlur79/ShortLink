@@ -11,6 +11,7 @@ chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
 
 mkdir -p /home/ec2-user/Shortener/code/nginx
 
+
 cat <<'EOT' > /home/ec2-user/Shortener/code/nginx/nginx.conf
 ${nginx_config}
 EOT

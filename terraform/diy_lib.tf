@@ -49,8 +49,12 @@ resource "aws_instance" "nginx_lb" {
               yum update -y
               yum install -y nginx
               
-              
-              cat <<'EOT' > /etc/nginx/nginx.conf
+              ${templatefile("footconfig.sh",{
+                foot_terminfo   = file("foot.terminfo.tpl")
+
+              })}
+
+              cat <<'EOT' > /etc/nginx/conf.d/shortlink.conf
               ${templatefile("${path.module}/nginx.conf.tpl", {
                 server1_ip = aws_instance.server.private_ip
                 server2_ip = aws_instance.server_2.private_ip
