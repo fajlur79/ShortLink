@@ -6,4 +6,13 @@ cookie*
 
 .env*
 
+.terraform/
+*.tfstate
+*.tfstate.*
+
+crash.log
+crash.*.log
+
+*.tfvars
+*.tfvars.json
 
