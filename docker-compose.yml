@@ -7,7 +7,7 @@ services:
 
     environment:
       - PORT=3000
-      - REDIS_URL=redis://redis:6379
+      - REDIS_URL=${REDIS_URL}
       - PUBLIC_IP=${PUBLIC_IP} 
       
     depends_on:

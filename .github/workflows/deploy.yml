@@ -89,11 +89,18 @@ jobs:
             echo "Pulling image: ghcr.io/$IMAGE_NAME:latest"
             docker pull ghcr.io/$IMAGE_NAME:latest
             
+
             
             if [ ! -f docker-compose.yml ]; then
               echo "Error: docker-compose.yml not found in ~/Shortener/code!"
               exit 1
             fi
+
+            echo "Creating .env file..."
+            cat <<EOF > .env
+            PORT=3000
+            REDIS_URL=${{ secret.REDIS_URL }}
+            EOF
 
             docker compose down || true
             docker compose up -d

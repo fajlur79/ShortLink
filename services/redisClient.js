@@ -9,5 +9,6 @@ await redis.connect();
 redis.on('error', (err)=>{
   logger.error("Redis connection error", {error: err.message});
 });
+await redis.connect()
 
 export default redis;
