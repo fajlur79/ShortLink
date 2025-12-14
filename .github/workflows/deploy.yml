@@ -99,7 +99,7 @@ jobs:
             echo "Creating .env file..."
             cat <<EOF > .env
             PORT=3000
-            REDIS_URL=${{ secret.REDIS_URL }}
+            REDIS_URL=${{ secrets.REDIS_URL }}
             EOF
 
             docker compose down || true
