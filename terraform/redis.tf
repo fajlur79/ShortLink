@@ -27,6 +27,10 @@ resource "aws_instance" "redis_server" {
   vpc_security_group_ids = [aws_security_group.redis_sg.id]
   private_ip = "172.31.4.126"
 
+  lifecycle {
+    ignore_changes = [ami]
+  }
+
   tags = {
     Name = "ShortLink-Redis-DB"
   }
@@ -40,7 +44,8 @@ resource "aws_instance" "redis_server" {
               sed -i 's/^bind 127.0.0.1/bind 0.0.0.0/' /etc/redis6/redis6.conf
               
               sed -i 's/^protected-mode yes/protected-mode no/' /etc/redis6/redis6.conf
-              
+              sed -i 's/^appendonly no/appendonly yes/' /etc/redis6/redis6.conf
+
               systemctl enable redis6
               systemctl start redis6
               EOF

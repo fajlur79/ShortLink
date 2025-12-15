@@ -37,7 +37,7 @@ const PORT = process.env.PORT;
 if(process.env.NODE_ENV != 'test'){
     const PORT = process.env.PORT;
     app.listen(PORT,() => {
-        logger.info(`Shortener online on port ${PORT}`);
+        logger.info(`ShortLink online on port ${PORT}`);
 });
 }
 

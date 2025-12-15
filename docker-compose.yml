@@ -2,27 +2,27 @@ services:
   app:
     image: ghcr.io/hawkeyexz/shortlink:latest
     
-    container_name: shortener_app
+    container_name: shortlink_app
     restart: always
 
     environment:
       - PORT=3000
       - REDIS_URL=${REDIS_URL}
-      - PUBLIC_IP=${PUBLIC_IP} 
+      - BASE_URL=${BASE_URL} 
       
     depends_on:
       - redis
 
   redis:
     image: redis:7-alpine
-    container_name: shortener_redis
+    container_name: shortlink_redis
     restart: always
     volumes:
       - redis_data:/data
 
   nginx:
     image: nginx:alpine
-    container_name: shortener_nginx
+    container_name: shortlink_nginx
     restart: always
     ports:
       - "80:80"

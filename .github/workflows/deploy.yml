@@ -76,8 +76,8 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            mkdir -p ~/Shortener/code
-            cd ~/Shortener/code
+            mkdir -p ~/ShortLink
+            cd ~/ShortLink
             
             
             REPO_NAME="${{ github.repository }}"
@@ -92,7 +92,7 @@ jobs:
 
             
             if [ ! -f docker-compose.yml ]; then
-              echo "Error: docker-compose.yml not found in ~/Shortener/code!"
+              echo "Error: docker-compose.yml not found in ~/ShortLink!"
               exit 1
             fi
 

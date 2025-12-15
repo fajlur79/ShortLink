@@ -43,6 +43,10 @@ resource "aws_instance" "server" {
   key_name      = aws_key_pair.deployer.key_name
   vpc_security_group_ids = [aws_security_group.app_sg.id]
 
+  lifecycle {
+    ignore_changes = [ami]
+  }
+
   user_data = templatefile("setup.sh", {
     nginx_config          = file("../nginx/nginx.conf")
     docker_compose_config = file("../docker-compose.yml")
@@ -61,6 +65,10 @@ resource "aws_instance" "server_2" {
   instance_type = "t3.micro"
   key_name      = aws_key_pair.deployer.key_name
   vpc_security_group_ids = [aws_security_group.app_sg.id]
+  
+  lifecycle {
+    ignore_changes = [ami]
+  }
 
   user_data = templatefile("setup.sh", {
     nginx_config          = file("../nginx/nginx.conf")

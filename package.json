@@ -1,5 +1,5 @@
 {
-  "name": "shortener",
+  "name": "ShortLink",
   "version": "1.0.0",
   "description": "Short link generator",
   "main": "app.js",
