@@ -1,6 +1,6 @@
 services:
   app:
-    image: ghcr.io/hawkeyexz/shortlink:latest
+    image: ghcr.io/fajlur79/shortlink:latest
     
     container_name: shortlink_app
     restart: always
