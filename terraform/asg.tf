@@ -2,9 +2,9 @@ resource "aws_autoscaling_group" "app_asg" {
     name                = "ShortLink-asg"
     vpc_zone_identifier = data.aws_subnets.default.ids
 
-    min_size            = 2
-    max_size            = 4
-    desired_capacity    = 2
+    min_size            = 1
+    max_size            = 1
+    desired_capacity    = 1
 
     launch_template {
         id      = aws_launch_template.app_lt.id
