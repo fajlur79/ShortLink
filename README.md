@@ -399,7 +399,8 @@ graph TD
     %% CI/CD Flow
     GH[GitHub Actions] -.->|SSM Deploy Command| EC2
     style GH fill:#24292e,stroke:#ffffff,color:white
-    
+```
+
 ## 🔒 Rate Limiting
 
 ShortLink implements multiple layers of rate limiting:
