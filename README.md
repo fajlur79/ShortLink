@@ -363,6 +363,43 @@ Infrastructure includes:
 - ACM SSL certificates
 - ElastiCache for Redis 
 
+## ☁️ Cloud Architecture
+
+The following diagram illustrates the AWS infrastructure provisioned by Terraform.
+
+```mermaid
+graph TD
+    User([User])
+    
+    subgraph AWS [AWS Cloud Region]
+        style AWS fill:#f9f9f9,stroke:#232f3e,stroke-width:2px
+        
+        ALB[Application Load Balancer]
+        style ALB fill:#FF9900,stroke:#232f3e,color:white
+        
+        subgraph VPC [VPC]
+            style VPC fill:#ffffff,stroke:#8c8c8c,stroke-dasharray: 5 5
+            
+            subgraph ASG [Auto Scaling Group]
+                style ASG fill:#e6f7ff,stroke:#1890ff
+                EC2[EC2 Instance]
+                Docker[Node.js App Container]
+            end
+            
+            Redis[(ElastiCache Redis)]
+            style Redis fill:#fff1f0,stroke:#D93025,color:black
+        end
+    end
+    
+    User -- "HTTPS (443)" --> ALB
+    ALB -- "Traffic Forwarding" --> EC2
+    EC2 -- "Port 3000" --> Docker
+    Docker -- "Cache/Store (6379)" --> Redis
+    
+    %% CI/CD Flow
+    GH[GitHub Actions] -.->|SSM Deploy Command| EC2
+    style GH fill:#24292e,stroke:#ffffff,color:white
+    
 ## 🔒 Rate Limiting
 
 ShortLink implements multiple layers of rate limiting:
