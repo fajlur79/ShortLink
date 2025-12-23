@@ -1,8 +1,6 @@
 resource "aws_acm_certificate" "main" {
   domain_name       = "shorts.codes"
   validation_method = "DNS"
-
- 
   subject_alternative_names = ["www.shorts.codes"]
 
   lifecycle {
@@ -10,7 +8,8 @@ resource "aws_acm_certificate" "main" {
   }
 }
 
-resource "aws_route53_record" "cert_validation" {
+
+resource "cloudflare_record" "acm_validation" {
   for_each = {
     for dvo in aws_acm_certificate.main.domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
@@ -19,27 +18,18 @@ resource "aws_route53_record" "cert_validation" {
     }
   }
 
-  allow_overwrite = true
-  name            = each.value.name
-  records         = [each.value.record]
-  ttl             = 60
-  type            = each.value.type
-  zone_id         = aws_route53_zone.main.zone_id
+  zone_id = data.cloudflare_zone.main.id 
+  name    = each.value.name
+  content   = each.value.record
+  type    = each.value.type
+  
+  proxied = false 
 }
 
 resource "aws_acm_certificate_validation" "main" {
   certificate_arn         = aws_acm_certificate.main.arn
-  validation_record_fqdns = [for record in aws_route53_record.cert_validation : record.fqdn]
-}
-
-output "acm_certificate_cname" {
-  value = {
-    for dvo in aws_acm_certificate.main.domain_validation_options : dvo.domain_name => {
-      name   = dvo.resource_record_name
-      record = dvo.resource_record_value
-      type   = dvo.resource_record_type
-    }
-  }
+  
+  validation_record_fqdns = [for record in cloudflare_record.acm_validation : record.hostname]
 }
 
 output "certificate_arn" {
