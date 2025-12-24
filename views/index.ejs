@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShortLink | Professional URL Shortener</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                ShortLink
+            </a>
+
+            <div class="nav-links">
+                <div id="sessionBadge" class="session-badge" style="display: none;">
+                    <span class="dot"></span> Session Active
+                </div>
+                
+                <a href="https://github.com/fajlur79/ShortLink" target="_blank" class="nav-item">
+                    <i class="fa-brands fa-github"></i> GitHub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        
+        <div class="hero-text">
+            <h1>Make your links <span class="gradient-text">shorter</span></h1>
+            <p>A powerful, privacy-focused URL shortener!.</p>
+        </div>
+
+        <div class="glass-card">
+            
+            <div id="alert" class="alert"></div>
+
+            <div id="newTokenReveal" class="token-reveal-panel" style="display: none;">
+                <div class="reveal-header">
+                    <i class="fa-solid fa-key"></i> New API Token Generated
+                </div>
+                <p class="reveal-warning">
+                    Please copy this token now. For security reasons, <strong>it will not be shown again</strong>.
+                </p>
+                <div class="token-display-row">
+                    <code id="tokenValue" class="token-code"></code>
+                    <button id="copyTokenBtn" class="btn-icon" title="Copy Token">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="input-wrapper">
+                <div class="input-icon">
+                    <i class="fa-solid fa-link"></i>
+                </div>
+                <input 
+                    type="url" 
+                    id="urlInput" 
+                    placeholder="Paste a long URL here (e.g. https://super-long-site.com/...)"
+                    required
+                >
+                <button id="shortenBtn" class="btn btn-primary">
+                    Shorten <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <div class="actions-row">
+                <button id="generateTokenBtn" class="btn btn-text">
+                    <i class="fa-solid fa-fingerprint"></i> Get New API Token
+                </button>
+            </div>
+
+            <div id="result" class="result-panel">
+                <div class="result-success">
+                    <i class="fa-solid fa-check-circle"></i> Success!
+                </div>
+                <div class="result-input-group">
+                    <input type="text" id="shortUrl" readonly />
+                    <button id="copyUrlBtn" class="btn btn-copy">
+                        <i class="fa-regular fa-copy"></i> Copy
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card full-width">
+                <div class="stat-icon"><i class="fa-solid fa-bolt"></i></div>
+                <div class="stat-info">
+                    <span class="stat-label">Daily Capacity</span>
+                    <div class="stat-numbers">
+                        <span id="urlsShortened" class="stat-current">-</span>
+                        <span class="stat-separator">/</span>
+                        <span id="urlsLimit" class="stat-total">10</span>
+                        <span class="stat-label-inline">URLs Shortened</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 ShortLink System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        window.APP_CONFIG = { apiBase: window.location.origin };
+    </script>
+    <script src="/js/script.js"></script>
+</body>
+</html>
