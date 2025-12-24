@@ -8,15 +8,18 @@ export default function deviceMiddleware(req, res, next) {
     return next();
   }
 
-  
+  const isProduction = process.env.NODE_ENV === 'production';
   const newId = nanoid();
   res.cookie("deviceId", newId, {
     maxAge: 30 * 24 * 60 * 60 * 1000,
     httpOnly: true,
-    sameSite: "lax",
+    secure: isProduction,
+    sameSite: isProduction? 'None' : "lax",
   });
   
 
   req.deviceId = newId;
+  console.log(`[New Id]:${newId}, secure? : ${isProduction}`)
+  
   next();
 }

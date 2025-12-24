@@ -1,5 +1,5 @@
 {
-  "name": "ShortLink",
+  "name": "shortlink",
   "version": "1.0.0",
   "description": "Short link generator",
   "main": "app.js",
@@ -16,6 +16,7 @@
   "dependencies": {
     "cookie-parser": "^1.4.7",
     "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
     "express": "^5.2.1",
     "express-rate-limit": "^8.2.1",
     "nanoid": "^5.1.6",
