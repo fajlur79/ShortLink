@@ -5,13 +5,20 @@ import router from "./routes/index.js";
 import deviceMiddleware from "./middleware/device.js";
 import { ipLimiter } from './middleware/rateLimit.js';
 import logger from './utils/logger.js';
-
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
+
 // disable this line when running locally
-app.enable('trust proxy', 1) 
+app.enable('trust proxy', 1)
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use((req, res, next)=>{
@@ -29,7 +36,10 @@ app.use(ipLimiter)
 
 
 app.get("/", deviceMiddleware, (req, res)=>{
-    res.status(200).send("Welcome to ShortLink.")
+    res.status(200).render('index', {
+        title: "ShortLink",
+        apiUrl: process.env.BASE_URL || req.get('host')
+    });
 });
 
 app.use("/", router);
