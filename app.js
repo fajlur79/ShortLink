@@ -9,6 +9,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
+
 // disable this line when running locally
 app.enable('trust proxy', 1)
 

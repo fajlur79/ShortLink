@@ -9,20 +9,20 @@
         shortenBtn: document.getElementById('shortenBtn'),
         generateTokenBtn: document.getElementById('generateTokenBtn'),
         copyUrlBtn: document.getElementById('copyUrlBtn'),
-        copyTokenBtn: document.getElementById('copyTokenBtn'), // New
+        copyTokenBtn: document.getElementById('copyTokenBtn'), 
         result: document.getElementById('result'),
         shortUrl: document.getElementById('shortUrl'),
         alert: document.getElementById('alert'),
-        newTokenReveal: document.getElementById('newTokenReveal'), // New
-        tokenValue: document.getElementById('tokenValue'), // New
-        sessionBadge: document.getElementById('sessionBadge'), // New
+        newTokenReveal: document.getElementById('newTokenReveal'), 
+        tokenValue: document.getElementById('tokenValue'), 
+        sessionBadge: document.getElementById('sessionBadge'), 
         urlsShortened: document.getElementById('urlsShortened'),
         urlsLimit: document.getElementById('urlsLimit')
     };
 
     async function init() {
         setupEventListeners();
-        await checkExistingToken(); // Silently checks
+        await checkExistingToken(); 
         await loadUsageStats();
     }
 
@@ -36,7 +36,6 @@
         });
     }
 
-    // Check for existing token (SILENT - Does not show UI)
     async function checkExistingToken() {
         try {
             const response = await fetchAPI('/get-key', { method: 'GET' });
@@ -52,11 +51,8 @@
         }
     }
 
-    // Generate new token (LOUD - Shows UI)
     async function handleGenerateToken() {
         setButtonLoading(elements.generateTokenBtn, true, 'Generating...');
-        
-        // Hide previous results
         elements.newTokenReveal.style.display = 'none';
 
         try {
@@ -69,13 +65,11 @@
             const data = await response.json();
             currentToken = data.token;
             
-            // 1. Show the "One Time Reveal" box
+           
             showNewToken(data.token);
             
-            // 2. Update Badge
             updateSessionState(true);
             
-            // 3. Refresh Stats (to check for the limit warning)
             await loadUsageStats();
 
         } catch (error) {
@@ -134,11 +128,9 @@
     }
 
     function updateStats(data) {
-        // Update URL Counters
         elements.urlsShortened.textContent = data.limits.shortening.used;
         elements.urlsLimit.textContent = data.limits.shortening.limit;
 
-        // Check Token Limit for Popup Warning
         const tokenStats = data.limits.tokenGeneration.device;
         const remainingTokens = tokenStats.limit - tokenStats.used;
 
@@ -147,7 +139,6 @@
         }
     }
 
-    // UI Helpers
     function updateSessionState(isActive) {
         elements.sessionBadge.style.display = isActive ? 'inline-block' : 'none';
     }
@@ -163,11 +154,9 @@
         elements.result.classList.add('show');
     }
 
-    // Robust Copy Function (Works on Mobile/HTTP)
     async function copyToClipboard(inputElementOrText, button) {
         const text = inputElementOrText.value || inputElementOrText.textContent;
         
-        // Helper to trigger success animation
         const showSuccess = () => {
             const originalText = button.innerHTML;
             button.innerHTML = '<i class="fa-solid fa-check"></i>';
@@ -179,16 +168,13 @@
         };
 
         try {
-            // 1. Try Modern API (Works on HTTPS)
             if (navigator.clipboard && window.isSecureContext) {
                 await navigator.clipboard.writeText(text);
                 showSuccess();
             } else {
-                // 2. Fallback for Mobile/HTTP (The "Old School" way)
                 const textArea = document.createElement("textarea");
                 textArea.value = text;
                 
-                // Ensure it's not visible but part of the DOM
                 textArea.style.position = "fixed";
                 textArea.style.left = "-9999px";
                 textArea.style.top = "0";
