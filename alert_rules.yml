@@ -1,0 +1,26 @@
+groups:
+  - name: shortlink-alerts
+    rules:
+      # Alert if High Error Rate (> 5% of requests are 5xx)
+      - alert: HighErrorRate
+        expr: |
+          sum(rate(http_request_duration_seconds_count{status_code=~"5.."}[1m]))
+          /
+          sum(rate(http_request_duration_seconds_count[1m])) > 0.05
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High Error Rate detected"
+          description: "More than 5% of requests are failing."
+
+      # Alert if High Latency (99th percentile > 1 second)
+      - alert: HighLatency
+        expr: |
+          histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket[5m])) by (le)) > 1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High Latency detected"
+          description: "99% of requests are taking longer than 1 second."
