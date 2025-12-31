@@ -1,6 +1,7 @@
 services:
   app:
-    image: ghcr.io/fajlur79/shortlink:latest
+    #image: ghcr.io/fajlur79/shortlink:latest
+    build: .
     
     container_name: shortlink_app
     restart: always
@@ -8,7 +9,9 @@ services:
     environment:
       - PORT=3000
       - REDIS_URL=${REDIS_URL}
-      - BASE_URL=${BASE_URL} 
+      - BASE_URL=${BASE_URL}
+    ports:
+      - "3000:3000" 
       
     depends_on:
       - redis
@@ -19,6 +22,17 @@ services:
     restart: always
     volumes:
       - redis_data:/data
+  
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: shortlink_prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./alert_rules.yml:/etc/prometheus/alert_rules.yml
+    ports:
+      - "9090:9090"
+    depends_on:
+      - app
 
   nginx:
     image: nginx:alpine

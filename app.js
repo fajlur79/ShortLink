@@ -7,9 +7,13 @@ import { ipLimiter } from './middleware/rateLimit.js';
 import logger from './utils/logger.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { metricsEndpoint, metricsMiddleware } from './middleware/metrics.js';
+
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 
+app.use(metricsMiddleware)
 // disable this line when running locally
 app.enable('trust proxy', 1)
 
@@ -42,7 +46,10 @@ app.get("/", deviceMiddleware, (req, res)=>{
     });
 });
 
+app.get('/metrics', metricsEndpoint)
+
 app.use("/", router);
+
 
 
 if(process.env.NODE_ENV != 'test'){
