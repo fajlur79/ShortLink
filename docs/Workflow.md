@@ -21,26 +21,31 @@ The system is intentionally stateless at the application layer. All stateful con
 
 ```mermaid
 flowchart LR
+    classDef client fill:#f5f5f5,stroke:#7f8c8d,stroke-width:1px;
+    classDef lb fill:#fff0e6,stroke:#ff9900,stroke-width:1px;
     classDef edge fill:#eef6ff,stroke:#4a90e2,stroke-width:1px;
     classDef app fill:#e8fff3,stroke:#2ecc71,stroke-width:1px;
     classDef data fill:#fff5e6,stroke:#f5a623,stroke-width:1px;
-    classDef client fill:#f5f5f5,stroke:#7f8c8d,stroke-width:1px;
 
     Client[Client / Browser]
+    ALB[AWS Application Load Balancer]
     NGINX[NGINX<br/>Reverse Proxy]
     App[Node.js<br/>Express Application]
     Redis[(Redis<br/>In-Memory Store)]
 
-    Client -->|HTTP Request| NGINX
-    NGINX -->|Forward| App
+    Client -->|HTTPS| ALB
+    ALB -->|Forward traffic| NGINX
+    NGINX -->|Proxy| App
     App -->|Read / Write| Redis
     Redis -->|Result| App
     App -->|HTTP Response| Client
 
     class Client client
+    class ALB lb
     class NGINX edge
     class App app
     class Redis data
+
 ```
 
 ### Step-by-Step
@@ -60,7 +65,9 @@ flowchart LR
    * Applies rate limiting rules
 
 4. **Redis Storage**
-
+   * Redis acts as a centralized coordination layer for all applicationinstances.
+   * In production, Redis is shared across instances via AWS ElastiCache;
+   * In local development, the same behavior is simulated using a Dockerized Redis instance.
    * Stores the short alias → long URL mapping
    * May store metadata such as timestamps or counters
 

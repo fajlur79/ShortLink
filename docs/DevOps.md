@@ -54,23 +54,58 @@ Docker Compose is used for:
 This allows the full stack to be brought up with a single command while closely mirroring production topology.
 
 ---
+## Redis: Local vs Production
 
-## Reverse Proxy & Networking
+ShortLink relies on Redis for URL mappings, rate limiting, token usage,
+and request counters. Redis is a shared state dependency and must be
+centralized in production.
 
-![High-Level Architecture](images/architecture-overview.png)
+### Local Development
 
-### NGINX
+For local development, Redis runs as a Docker container defined in
+`docker-compose.yml`. This allows developers to run the full system
+without external cloud dependencies.
 
-NGINX acts as the front-facing reverse proxy:
+```yaml
+redis:
+  image: redis:7-alpine
+  container_name: shortlink_redis
+  restart: always
+  volumes:
+    - redis_data:/data
 
-* Terminates incoming HTTP traffic
-* Forwards requests to the Node.js service
-* Handles basic request filtering and buffering
-* Provides a single stable entry point
-
-This design decouples external traffic concerns from application logic.
+volumes:
+  redis_data:
 
 ---
+
+## Traffic Entry & Networking
+
+ShortLink uses a layered traffic entry model designed for security,
+scalability, and fault isolation.
+
+### AWS Application Load Balancer (ALB)
+
+The AWS Application Load Balancer is the **only internet-facing
+component** of the system.
+
+Responsibilities:
+- Terminates HTTPS (TLS)
+- Performs health checks
+- Distributes traffic across EC2 instances in an Auto Scaling Group
+- Prevents direct internet access to application instances
+
+### NGINX (Instance-Level Reverse Proxy)
+
+NGINX runs **inside each EC2 instance**, in front of the Node.js
+application.
+
+Responsibilities:
+- Acts as a security and isolation layer
+- Normalizes incoming requests
+- Proxies traffic to the application server
+
+
 
 ## Infrastructure as Code
 

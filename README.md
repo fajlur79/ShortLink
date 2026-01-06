@@ -36,11 +36,12 @@ The project is intentionally opinionated. It favors clarity, debuggability, and 
 At a high level, ShortLink follows a layered architecture:
 
 1. **Client** sends requests to shorten or resolve URLs
-2. **NGINX** acts as the edge reverse proxy
-3. **Express (Node.js)** handles API logic and redirects
-4. **Redis** provides low-latency storage for URL mappings and rate limits
-5. **Docker** packages services consistently across environments
-6. **AWS (via Terraform)** provisions production infrastructure
+2. **AWS Application Load Balancer (ALB)** handles incoming HTTPS traffic
+3. **NGINX** runs as an instance-level reverse proxy and security layer
+4. **Express (Node.js)** handles API logic and redirects
+5. **Redis** provides low-latency shared storage for URL mappings and rate limits
+6. **Docker** packages services consistently across environments
+7. **AWS (via Terraform)** provisions production infrastructure
 
 This separation ensures each layer can scale, fail, or evolve independently.
 
@@ -105,7 +106,7 @@ The service will be available at `http://localhost:3000` by default.
 
 ```bash
 # Build and start all services
-docker compose up --build
+docker compose up --build -d
 ```
 
 This starts:
@@ -116,8 +117,31 @@ This starts:
 
 All services are wired together using Docker networking.
 
----
 
+*Note on Redis*
+
+For local development, Redis runs as a Docker container via
+docker-compose to avoid external cloud dependencies.
+
+In production, Redis is provided by AWS ElastiCache and does not
+run on EC2 instances. All application instances connect to the
+centralized Redis store using the REDIS_URL environment variable.
+
+For local Docker-based development, Redis is defined as:
+
+```bash
+redis:
+  image: redis:7-alpine
+  container_name: shortlink_redis
+  restart: always
+  volumes:
+    - redis_data:/data
+
+volumes:
+  redis_data:
+
+```
+---
 ## Documentation Index
 
 Detailed documentation is split by responsibility:
