@@ -1,13 +1,13 @@
 # ShortLink
 
-![Node.js](https://img.shields.io/badge/node.js-339933.svg?style=flat\&logo=node.js\&logoColor=white)
-![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=flat\&logo=express\&logoColor=white)
-![Redis](https://img.shields.io/badge/redis-DC382D.svg?style=flat\&logo=redis\&logoColor=white)
-![Docker](https://img.shields.io/badge/docker-2496ED.svg?style=flat\&logo=docker\&logoColor=white)
-![NGINX](https://img.shields.io/badge/nginx-009639.svg?style=flat\&logo=nginx\&logoColor=white)
-![Terraform](https://img.shields.io/badge/terraform-7B42BC.svg?style=flat\&logo=terraform\&logoColor=white)
-![AWS](https://img.shields.io/badge/aws-232F3E.svg?style=flat\&logo=amazon-aws\&logoColor=white)
-![GitHub Actions](https://img.shields.io/badge/github%20actions-2088FF.svg?style=flat\&logo=github-actions\&logoColor=white)
+![Node.js](https://img.shields.io/badge/node.js-339933.svg?style=for-the-badge\&logo=node.js\&logoColor=white)
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge\&logo=express\&logoColor=white)
+![Redis](https://img.shields.io/badge/redis-DC382D.svg?style=for-the-badge\&logo=redis\&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-2496ED.svg?style=for-the-badge\&logo=docker\&logoColor=white)
+![NGINX](https://img.shields.io/badge/nginx-009639.svg?style=for-the-badge\&logo=nginx\&logoColor=white)
+![Terraform](https://img.shields.io/badge/terraform-7B42BC.svg?style=for-the-badge\&logo=terraform\&logoColor=white)
+![AWS](https://img.shields.io/badge/aws-232F3E.svg?style=for-the-badge\&logo=amazon-aws\&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/github%20actions-2088FF.svg?style=for-the-badge\&logo=github-actions\&logoColor=white)
 
 ---
 
@@ -51,31 +51,31 @@ This separation ensures each layer can scale, fail, or evolve independently.
 
 ### Application Layer
 
-![Node.js](https://img.shields.io/badge/node.js-339933.svg?style=flat\&logo=node.js\&logoColor=white)
-![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=flat\&logo=express\&logoColor=white)
+![Node.js](https://img.shields.io/badge/node.js-339933.svg?style=for-the-badge\&logo=node.js\&logoColor=white)
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge\&logo=express\&logoColor=white)
 
 * Node.js runtime
 * Express.js web framework
 
 ### Caching & Data
 
-![Redis](https://img.shields.io/badge/redis-DC382D.svg?style=flat\&logo=redis\&logoColor=white)
+![Redis](https://img.shields.io/badge/redis-DC382D.svg?style=for-the-badge\&logo=redis\&logoColor=white)
 
 * Redis for URL storage and rate limiting
 
 ### Containerization & Networking
 
-![Docker](https://img.shields.io/badge/docker-2496ED.svg?style=flat\&logo=docker\&logoColor=white)
-![NGINX](https://img.shields.io/badge/nginx-009639.svg?style=flat\&logo=nginx\&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-2496ED.svg?style=for-the-badge\&logo=docker\&logoColor=white)
+![NGINX](https://img.shields.io/badge/nginx-009639.svg?style=for-the-badge\&logo=nginx\&logoColor=white)
 
 * Docker for reproducible environments
 * NGINX as reverse proxy and traffic gatekeeper
 
 ### Infrastructure & Automation
 
-![Terraform](https://img.shields.io/badge/terraform-7B42BC.svg?style=flat\&logo=terraform\&logoColor=white)
-![AWS](https://img.shields.io/badge/aws-232F3E.svg?style=flat\&logo=amazon-aws\&logoColor=white)
-![GitHub Actions](https://img.shields.io/badge/github%20actions-2088FF.svg?style=flat\&logo=github-actions\&logoColor=white)
+![Terraform](https://img.shields.io/badge/terraform-7B42BC.svg?style=for-the-badge\&logo=terraform\&logoColor=white)
+![AWS](https://img.shields.io/badge/aws-232F3E.svg?style=for-the-badge\&logo=amazon-aws\&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/github%20actions-2088FF.svg?style=for-the-badge\&logo=github-actions\&logoColor=white)
 
 * Terraform for Infrastructure-as-Code
 * AWS as the cloud provider

@@ -1,10 +1,11 @@
 # DevOps & Infrastructure
 
-![Docker](https://img.shields.io/badge/docker-2496ED.svg?style=flat\&logo=docker\&logoColor=white)
-![NGINX](https://img.shields.io/badge/nginx-009639.svg?style=flat\&logo=nginx\&logoColor=white)
-![Terraform](https://img.shields.io/badge/terraform-7B42BC.svg?style=flat\&logo=terraform\&logoColor=white)
-![AWS](https://img.shields.io/badge/aws-232F3E.svg?style=flat\&logo=amazon-aws\&logoColor=white)
-![GitHub Actions](https://img.shields.io/badge/github%20actions-2088FF.svg?style=flat\&logo=github-actions\&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-2496ED.svg?style=for-the-badge&\&logo=docker\&logoColor=white)
+![NGINX](https://img.shields.io/badge/nginx-009639.svg?style=for-the-badge&\&logo=nginx\&logoColor=white)
+![Terraform](https://img.shields.io/badge/terraform-7B42BC.svg?style=for-the-badge&\&logo=terraform\&logoColor=white)
+![AWS](https://img.shields.io/badge/aws-232F3E.svg?style=for-the-badge&\&logo=amazon-aws&color=FF9900\&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/github%20actions-2088FF.svg?style=for-the-badge&\&logo=github-actions\&logoColor=white)
+
 
 ---
 
@@ -171,9 +172,9 @@ Configuration is treated as code but secrets are treated as runtime concerns.
 
 ## Observability & Monitoring
 
-![Grafana](https://img.shields.io/badge/grafana-F46800.svg?style=flat\&logo=grafana\&logoColor=white)
-![Prometheus](https://img.shields.io/badge/prometheus-E6522C.svg?style=flat\&logo=prometheus\&logoColor=white)
-![Amazon CloudWatch](https://img.shields.io/badge/amazon%20cloudwatch-FF4F8B.svg?style=flat\&logo=amazon-cloudwatch\&logoColor=white)
+![Grafana](https://img.shields.io/badge/grafana-F46800.svg?style=for-the-badge&labelColor=101418&logo=grafana)
+![Prometheus](https://img.shields.io/badge/prometheus-E6522C.svg?style=for-the-badge\&logo=prometheus\&logoColor=white)
+![Amazon CloudWatch](https://img.shields.io/badge/amazon%20cloudwatch-FF4F8B.svg?style=for-the-badge\&logo=amazon-cloudwatch\&logoColor=white)
 
 ![Observability Flow](images/observability-flow.png)
 
@@ -191,6 +192,7 @@ CloudWatch is responsible for **infrastructure-level observability**:
 It acts as the first line of defense against platform-level failures.
 
 ### Prometheus
+![promethuus](docs/images/prometheus.png)
 
 Prometheus is used for **application-level metrics**:
 
@@ -202,7 +204,7 @@ Prometheus is used for **application-level metrics**:
 Metrics are scraped from the application and stored in a time-series model optimized for analysis.
 
 ### Grafana
-![grafana](/images/grafana.png)
+![grafana](docs/images/grafana.png)
 
 Grafana serves as the **visualization and analysis layer**:
 
