@@ -89,6 +89,8 @@ This separation ensures each layer can scale, fail, or evolve independently.
 ### Local Development (Node.js)
 
 ```bash
+# Clone the repo
+git clone https://github.com/fajlur79/ShortLink.git && cd ShortLink
 # Install dependencies
 npm install
 
@@ -105,6 +107,16 @@ The service will be available at `http://localhost:3000` by default.
 
 ### Docker (Recommended)
 
+In [`docker-compose.yml`](docker-compose.yml) comment the cloudwatch logging part
+```bash
+# logging:
+#       driver: awslogs
+#       options:
+#         awslogs-region: ap-south-1
+#         awslogs-group: /ecs/shortlink
+#         awslogs-create-group: "true"
+
+```
 ```bash
 # Build and start all services
 docker compose up --build -d
