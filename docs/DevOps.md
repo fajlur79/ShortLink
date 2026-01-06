@@ -76,7 +76,7 @@ redis:
 
 volumes:
   redis_data:
-
+```
 ---
 
 ## Traffic Entry & Networking
