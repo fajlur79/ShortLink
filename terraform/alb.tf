@@ -1,14 +1,7 @@
-data "aws_subnets" "default" {
-  filter {
-    name   = "vpc-id"
-    values = [data.aws_vpc.default.id]
-  }
-}
-
 resource "aws_security_group" "lb_sg" {
   name        = "ShortLink-ALB-SG"
   description = "Allow HTTP to ShortLink Load Balancer"
-  vpc_id      = data.aws_vpc.default.id
+  vpc_id      = module.vpc.vpc_id
 
   ingress {
     description = "HTTP from Internet"
@@ -35,11 +28,11 @@ resource "aws_security_group" "lb_sg" {
 }
 
 resource "aws_lb" "app_lb" {
-  name               = "ShortLink-LB"
+  name_prefix        = "Sl-lb-"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.lb_sg.id]
-  subnets            = data.aws_subnets.default.ids
+  subnets            = module.vpc.public_subnets
 
   tags = {
     Name = "ShortLink-LoadBalancer"
@@ -47,11 +40,11 @@ resource "aws_lb" "app_lb" {
 }
 
 resource "aws_lb_target_group" "app_tg" {
-  name     = "ShortLink-TG"
-  port     = 80
-  protocol = "HTTP"
-  vpc_id   = data.aws_vpc.default.id
-
+  name_prefix     = "Sl-tg-"
+  port            = 80
+  protocol        = "HTTP"
+  vpc_id          = module.vpc.vpc_id
+  
   health_check {
     path                = "/"
     interval            = 30
@@ -59,6 +52,9 @@ resource "aws_lb_target_group" "app_tg" {
     healthy_threshold   = 2
     unhealthy_threshold = 2
     matcher             = "200"
+  }
+  lifecycle{
+    create_before_destroy = true
   }
 }
 

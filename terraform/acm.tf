@@ -1,7 +1,7 @@
 resource "aws_acm_certificate" "main" {
-  domain_name       = "shorts.codes"
+  domain_name       = var.domain_name
   validation_method = "DNS"
-  subject_alternative_names = ["www.shorts.codes"]
+  subject_alternative_names = ["www.${var.domain_name}"]
 
   lifecycle {
     create_before_destroy = true

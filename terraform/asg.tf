@@ -1,15 +1,18 @@
 resource "aws_autoscaling_group" "app_asg" {
     name                = "ShortLink-asg"
-    vpc_zone_identifier = data.aws_subnets.default.ids
+    vpc_zone_identifier = module.vpc.private_subnets
 
-    min_size            = 1
-    max_size            = 3
-    desired_capacity    = 1
+    min_size            = 2
+    max_size            = 4
+    desired_capacity    = 2
+
+    health_check_type           = "ELB"
+    health_check_grace_period   = 300
 
     instance_refresh {
         strategy = "Rolling"
         preferences {
-            min_healthy_percentage = 100
+            min_healthy_percentage = 50
         }
         triggers = ["tag"]
     }

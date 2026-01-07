@@ -34,15 +34,9 @@ cat <<'EOT' > /var/www/ShortLink/prometheus.yml
 ${prometheus_config}
 EOT
 
-cat <<EOF > /var/www/ShortLink/.env
-BASE_URL=${domain_name}
-PORT=${app_port}
-REDIS_URL=${redis_url}
-
-EOF
 
 
 chown -R ec2-user:ec2-user /var/www/ShortLink
 
 cd /var/www/ShortLink
-docker compose up -d
+PORT=${app_port} REDIS_URL=${redis_url} BASE_URL=${domain_name} docker compose up -d

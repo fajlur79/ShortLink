@@ -1,5 +1,5 @@
 data "cloudflare_zone" "main" {
-  name = "shorts.codes"
+  name = var.domain_name
 }
 resource "cloudflare_record" "root" {
   zone_id = data.cloudflare_zone.main.id

@@ -6,10 +6,6 @@ variable "app_port" {
   default = 3000
 }
 
-variable "redis_url" {
-  description = "Connecting string for redis"
-  type        = string
-}
 
 variable "grafana_url" {
   description = "Grafana Cloud Prometheus Remote Write URL"
