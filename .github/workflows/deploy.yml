@@ -88,6 +88,6 @@ jobs:
               "export IMAGE_NAME=$(echo ${{ github.repository }} | tr [:upper:] [:lower:])",
               "docker pull ghcr.io/$IMAGE_NAME:latest",
               "docker compose -f docker-compose.yml down || true",
-              "PORT=3000 REDIS_URL=${{ secrets.REDIS_URL }} BASE_URL=${{secrets.BASE_URL }} docker compose -f docker-compose.yml up -d"
+              "PORT=3000 REDIS_URL=${{ secrets.REDIS_URL }} BASE_URL=${{secrets.BASE_URL }} docker compose -f docker-compose.yml up -d",
               "chown -R ec2-user:ec2-user /var/www/ShortLink"
             ]'
