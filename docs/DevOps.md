@@ -263,7 +263,7 @@ This architecture prioritizes **High Availability (HA)** and **Scalability**. Be
 
 ## 🔄 Architecture Evolution & Alternatives
 
-During the development of ShortLink, several architectural approaches were implemented and evaluated. The code for these alternative patterns is preserved in `terraform/alternatives/` for reference.
+During the development of ShortLink, several architectural approaches were implemented and evaluated. The code for these alternative patterns is preserved in [`terraform/alternatives/`](/terraform/alternatives) for reference.
 
 ### 1. Manual Load Balancing (vs. ALB)
 * **Initial Approach:** A single EC2 instance running NGINX (`diy_lb.tf`) with a custom IAM role and S3 bucket (`s3_iam.tf`) to manage SSL certificates manually.
